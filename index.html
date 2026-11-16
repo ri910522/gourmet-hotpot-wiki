@@ -10,7 +10,7 @@
   <header class="site-header">
     <div class="container header-inner">
       <a href="index.html" class="brand">🍲 美食與鍋物探店圖鑑</a>
-      <nav><a href="https://github.com" target="_blank">GitHub Repo</a></nav>
+      <nav><a href="https://github.com/ri910522/gourmet-hotpot-wiki" target="_blank">GitHub Repo</a></nav>
     </div>
   </header>
 
@@ -20,8 +20,15 @@
       <p>系統化記錄聚餐必吃鍋物、韓式烤肉與特色小店的真實點餐心得與避雷指南。
     </section>
 
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="filterSpots('all', this)">🍽️ 全部探店</button>
+      <button class="filter-btn" onclick="filterSpots('hotpot', this)">🍲 精品鍋物</button>
+      <button class="filter-btn" onclick="filterSpots('bbq', this)">🥩 韓式烤肉</button>
+    </div>
+
     <section class="spot-grid">
-      <a href="spots/spot01-hotpot.html" class="spot-card">
+      <a href="spots/spot01-hotpot.html" class="spot-card" data-category="hotpot">
+        <div class="card-cover cover-hotpot">🍲</div>
         <div class="card-top">
           <span class="badge">精品鍋物</span>
           <span class="rating">⭐ 4.8 / 5.0</span>
@@ -31,7 +38,8 @@
         <span class="card-link">查看探店筆記 →</span>
       </a>
 
-      <a href="spots/spot02-korean-bbq.html" class="spot-card">
+      <a href="spots/spot02-korean-bbq.html" class="spot-card" data-category="bbq">
+        <div class="card-cover cover-bbq">🥩</div>
         <div class="card-top">
           <span class="badge">韓式烤肉</span>
           <span class="rating">⭐ 4.7 / 5.0</span>
@@ -46,5 +54,15 @@
   <footer class="site-footer">
     <div class="container">Gourmet & Hot Pot Wiki · Powered by AGENTS.md</div>
   </footer>
+
+  <script>
+    function filterSpots(category, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.spot-card').forEach(card => {
+        card.style.display = (category === 'all' || card.dataset.category === category) ? 'flex' : 'none';
+      });
+    }
+  </script>
 </body>
 </html>
